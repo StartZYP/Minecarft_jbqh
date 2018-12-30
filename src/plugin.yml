@@ -1,0 +1,8 @@
+name: JBQH
+main: com.q44920040.bjqh.QH
+version: 2.0
+depend: [RPG_Items, Vault]
+commands:
+  jb:
+    description: jb open
+    usage: /jb open

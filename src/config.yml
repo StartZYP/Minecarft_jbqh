@@ -1,0 +1,8 @@
+general:
+  QHMess: "&a玩家%p成功强化出了%n武器"
+button:
+  confirm: "点击开始强化"
+  show: "当前强化成功率: %s&e当前强化花费: %nowc 下次强化花费: %nextc"
+other:
+  item: "160-1"
+chance: "该物品提高强化几率:"

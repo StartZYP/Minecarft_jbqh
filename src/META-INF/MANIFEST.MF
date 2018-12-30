@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Class-Path: craftbukkit-1.7.10-R0.1-20140808.005431-8.jar RPG_Items 4.
+ 09.jar Vault-1.4.1.jar
+

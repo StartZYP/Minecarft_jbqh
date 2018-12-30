@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact name="jbqh:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/jbqh_jar</output-path>
+    <root id="root">
+      <element id="archive" name="jbqh.jar">
+        <element id="module-output" name="jbqh" />
+      </element>
+    </root>
+  </artifact>
+</component>

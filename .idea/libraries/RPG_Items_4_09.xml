@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="RPG_Items 4.09">
+    <CLASSES>
+      <root url="jar://C:/javalib/RPG_Items 4.09.jar!/" />
+      <root url="jar://C:/javalib/Vault-1.4.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
