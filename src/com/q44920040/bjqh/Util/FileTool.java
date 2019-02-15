@@ -10,26 +10,18 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class FileTool {
-    public FileTool() {
-    }
-
     public static Set<FileConfiguration> loadConfigs() {
-        Set temps = new HashSet();
+        String[] qhids;
+        HashSet<FileConfiguration> temps = new HashSet<FileConfiguration>();
         File file = new File(QH.getInstance().getDataFolder() + File.separator + "data");
         if (!file.exists()) {
             file.mkdir();
         }
-
-        String[] qhids = file.list();
-        String[] var3 = qhids;
-        int var4 = qhids.length;
-
-        for(int var5 = 0; var5 < var4; ++var5) {
-            String qhid = var3[var5];
+        for (String qhid : qhids = file.list()) {
             File ifile = new File(QH.getInstance().getDataFolder() + File.separator + "data" + File.separator + qhid);
-            temps.add(YamlConfiguration.loadConfiguration(ifile));
+            temps.add((FileConfiguration)YamlConfiguration.loadConfiguration((File)ifile));
         }
-
         return temps;
     }
 }
+

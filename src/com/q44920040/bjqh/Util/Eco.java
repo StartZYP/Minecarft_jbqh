@@ -8,21 +8,16 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 public class Eco {
     public static Economy econ = null;
 
-    public Eco() {
-    }
-
     public static boolean setupEconomy() {
         if (QH.getInstance().getServer().getPluginManager().getPlugin("Vault") == null) {
             return false;
-        } else {
-            RegisteredServiceProvider rsp = QH.getInstance().getServer().getServicesManager().getRegistration(Economy.class);
-            if (rsp == null) {
-                return false;
-            } else {
-                econ = (Economy)rsp.getProvider();
-                return econ != null;
-            }
         }
+        RegisteredServiceProvider rsp = QH.getInstance().getServer().getServicesManager().getRegistration(Economy.class);
+        if (rsp == null) {
+            return false;
+        }
+        econ = (Economy)rsp.getProvider();
+        return econ != null;
     }
 
     public static double look(String pn) {
@@ -38,6 +33,9 @@ public class Eco {
     }
 
     public static boolean pay(String pn, double price) {
-        return econ.has(pn, price) ? econ.withdrawPlayer(pn, price).transactionSuccess() : false;
+        if (econ.has(pn, price)) {
+            return econ.withdrawPlayer(pn, price).transactionSuccess();
+        }
+        return false;
     }
 }

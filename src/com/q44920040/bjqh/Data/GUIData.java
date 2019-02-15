@@ -9,10 +9,7 @@ public class GUIData {
     public Player p;
     qhData nextQHData;
 
-    public GUIData() {
-    }
-
     public void updataQH() {
-        System.out.println(this.inv.getItem(13));
+        System.out.println((Object)this.inv.getItem(13));
     }
 }

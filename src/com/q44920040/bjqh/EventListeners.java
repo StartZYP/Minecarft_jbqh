@@ -18,6 +18,7 @@ import org.bukkit.inventory.ItemStack;
 
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 public class EventListeners implements Listener {
@@ -29,31 +30,22 @@ public class EventListeners implements Listener {
     @EventHandler
     public void onInventoryClose(InventoryCloseEvent e) {
         if (e.getPlayer() instanceof Player) {
-            Player p = (Player)e.getPlayer();
+            ItemStack item;
             Inventory guiinv;
+            Player p = (Player)e.getPlayer();
             if (this.lists.contains(p.getName()) && e.getInventory().getTitle().equals(MainGui.title)) {
-                guiinv = e.getInventory();
-                ItemStack qhitem = guiinv.getItem(13);
-                ItemStack bsitem = guiinv.getItem(37);
-                if (qhitem!=null&&qhitem.getType()!=Material.AIR){
-                    p.getInventory().addItem(qhitem);
-                    guiinv.setItem(13,new ItemStack(Material.AIR));
+                Inventory guiinv2 = e.getInventory();
+                Iterator<Integer> localIterator = MainGui.no_check.iterator();
+                while (localIterator.hasNext()) {
+                    int i = localIterator.next();
+                    ItemStack item2 = guiinv2.getItem(i);
+                    if (item2 == null || item2.getType() == Material.AIR) continue;
+                    p.getWorld().dropItem(p.getLocation().add(1.0, 0.0, 0.0), item2);
                 }
-                if (bsitem!=null&&bsitem.getType()!=Material.AIR){
-                    p.getInventory().addItem(bsitem);
-                    guiinv.setItem(37,new ItemStack(Material.AIR));
-                }
-                p.updateInventory();
-            } else if (e.getInventory().getTitle().equals("强化完毕") && e.getPlayer() instanceof Player) {
-                guiinv = e.getInventory();
-                ItemStack item = guiinv.getItem(13);
-                guiinv.setItem(37,new ItemStack(Material.AIR));
-                if (item != null) {
-                    p.getWorld().dropItem(p.getLocation().add(1.0D, 0.0D, 0.0D), item);
-                }
+            } else if (e.getInventory().getTitle().equals("\u5f3a\u5316\u5b8c\u6bd5") && e.getPlayer() instanceof Player && (item = (guiinv = e.getInventory()).getItem(22)) != null) {
+                p.getWorld().dropItem(p.getLocation().add(1.0, 0.0, 0.0), item);
             }
         }
-
     }
 
     @EventHandler
@@ -83,7 +75,7 @@ public class EventListeners implements Listener {
                     if (slot == MainGui.show_button) {
                         MainGui.updataShowButton(inv, p);
                     } else if (slot == MainGui.confirm_button) {
-                        MainGui.confirm(inv, p, 0);
+                        MainGui.confirm(inv, p);
                     }
                 }
             } else if (e.getInventory().getTitle().equals("强化中")) {
@@ -98,9 +90,9 @@ public class EventListeners implements Listener {
 
     private boolean check(InventoryClickEvent e, Player p) {
         int slot = e.getRawSlot();
-        if (slot < 54 && !MainGui.no_check.contains(slot)&&slot!=37) {
+        if (slot < 54 && !MainGui.no_check.contains(slot)) {
             if (e.getClick() == ClickType.SHIFT_LEFT) {
-                p.sendMessage("§c异常操作,请重新打开");
+                p.sendMessage("\u00a7c\u5f02\u5e38\u64cd\u4f5c,\u8bf7\u91cd\u65b0\u6253\u5f00");
                 e.setCancelled(true);
                 p.closeInventory();
                 return false;
